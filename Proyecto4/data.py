@@ -29,22 +29,18 @@ def get_synopsis_from_llama(text):
             "model": "llama-3.2-1b-instruct",
             "prompt": f"""
                 A continuación, se presenta un documento que puede ser la transcripción de un video convertido a texto, un artículo, o un libro. Necesito un resumen detallado que contenga toda la información relevante y que sea claro y organizado. Sigue estas indicaciones según el tipo de documento:
-
                 Si es un video:
-
                 Resume los puntos clave discutidos en el video.
                 Proporciona un breve contexto para cada punto clave.
                 Incluye explícitamente información numérica o datos importantes si se mencionan.
                 Destaca conclusiones, opiniones o propuestas presentadas en el video.
                 Si es un artículo o un libro (especificado al inicio del texto):
-
                 Identifica el tema principal y el propósito del documento.
                 Resume los puntos clave o capítulos importantes, indicando su contexto.
                 Incluye datos relevantes, citas textuales significativas, o ideas principales que refuercen el argumento central.
                 Destaca las conclusiones, aportaciones o propuestas más relevantes.
                 Texto original:
                 {text}
-
                 Por favor, crea un resumen preciso y fácil de entender, destacando toda la información esencial acorde al tipo de documento.
             """,
             "max_tokens": 40000

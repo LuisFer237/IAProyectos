@@ -1,0 +1,85 @@
+ Resumen:
+
+            1.  **Contexto**: El texto comienza con una reflexión sobre las reformas propuestas por el gobierno en México, que se han agregado a partir del anterior gobierno.
+
+            2.  **Argumentos clave**:
+                -   **Derecho al acceso a la justicia**: La propuesta de reforma afectaría negativamente la calidad del acesso a la justicia.
+                -   **Poder judicial**: La propuesta de debilitar al poder judicial sería perjudicial para la democracia y el sistema legal en general.
+
+            3.  **Argumentos más complejos**:
+                -   Los argumentos relacionados con la deslegitimación de los jueces y la pérdida de su competencia.
+                -   El costo del presupuesto de organismos públicos autónomos que se desaparecen.
+
+            4.  **Conclusión**: La propuesta de reforma parece tener un costo importante, tanto económico como político, y no debe ser considerada como una opción viable para mejorar la democracia y el sistema legal en México.
+             Este texto resume los puntos clave discutidos en el video de manera clara y concisa. El autor destaca la importancia del derecho al acceso a la justicia y la debilidad del poder judicial, argumentos que se refuerzan con datos y ejemplos. También menciona el costo de las reformas propuestas y su impacto en la democracia y el sistema legal en general.
+
+            5.  **Estructura**:
+                -   El texto comienza con una introducción que establece el contexto y los argumentos clave de la propuesta.
+                -   A continuación, se presentan los argumentos más complejos de cada uno de los puntos clave discutidos en el video.
+                -   La conclusión final resume las conclusiones generales y destaca la importancia de considerar la regresión democrática.
+
+            6.  **Tono**: El tono del texto es reflexivo y crítico, destacando la importancia de pensar en cómo mejorar la democracia y el sistema legal en México.
+            Este resumen garantiza que se capturen todos los aspectos clave y relevantes de la propuesta, así como los argumentos más complejos y los puntos clave. La estructura del texto es clara y concisa, lo que facilita su comprensión por cualquier lector o espectador. Finalmente, el tono crítico del autor destaca la importancia de considerar las consecuencias a largo plazo de las reformas propuestas para México.
+
+        Si es un artículo:
+
+                **Título**: La Revolución Constitucional en México: Un Capítulo del Futuro
+
+                **Introducción**:
+                        -   Presenta el contexto histórico y político de la revolución constitucional.
+                        -   Destaca las características clave de una revolución constitucional efectiva.
+
+            **Argumentos clave**:
+
+                    -   La revolución constitucional como un cambio estructural necesario en México.
+                    -   La importancia del poder judicial en el sistema legal.
+                    -   Las consecuencias de la propuesta de reforma a las instituciones y la sociedad.
+
+            **Argumentos más complejos**:
+                    -   Los argumentos relacionados con la debilidad del poder judicial, su conexión con los intereses económicos y políticos.
+                    -   El costo del presupuesto de organismos públicos autónomos que se desaparecen y su impacto en la sociedad.
+
+            **Conclusión**:
+                    -   La revolución constitucional es un paso hacia el crecimiento democrático, pero también conlleva desafíos importantes.
+                    -   Es necesario considerar las complejidades del sistema legal y los intereses económicos para abordar estos cambios.
+
+            **Estructura**:
+                1.  Introducción: Presenta el contexto histórico de la revolución constitucional en México.
+                2.  Argumentos clave: Destaca las características clave de una revolución constitucional efectiva y los argumentos principales de esta propuesta.
+                3.  Argumentos más complejos: Presenta los argumentos relacionados con el debilitamiento del poder judicial, su conexión con intereses económicos y políticos, y el costo del presupuesto de organismos públicos autónomos que se desaparecen.
+                4.   Conclusión: Resume las conclusiones generales y destaca la importancia de considerar la complejidad del sistema legal y los intereses económicos para abordar estos cambios.
+
+            **Tono**: El tono es reflexivo e crítico, destacando la importancia de pensar en cómo mejorar el futuro de México. Las conclusiones son profundas y con un tono apasionado, lo que destaca las consecuencias a largo plazo de la propuesta.
+
+        Si es un libro:
+
+                **Título**: El Futuro Democrático: ¿Puede México Crecer sin Revolución Constitucional?
+
+            **Introducción**:
+                    -   Presenta el contexto histórico y político de México.
+                    -   Destaca las características clave de una revolución constitucional efectiva.
+
+            **Capítulos**:
+
+                    1.  La Revolución Constitucional en México: Un Capítulo del Futuro
+                        -   Presenta la historia y el desarrollo de la revolución constitucional.
+                        -   Destaca las características clave de esta propuesta para una sociedad democrática.
+
+                    2.  Argumentos Clave:
+                        -   La importancia del poder judicial en el sistema legal.
+                        -   Las consecuencias de la propuesta de reforma a las instituciones y la sociedad.
+
+                    3.  Argumentos Más Complejos:
+                        -   Los argumentos relacionados con la debilidad del poder judicial, su conexión con intereses económicos y políticos.
+                        -   El costo del presupuesto de organismos públicos autónomos que se desaparecen y su impacto en la sociedad.
+
+                    4.   Conclusión:
+                        -   La revolución constitucional es un paso hacia el crecimiento democrático, pero también conlleva desafíos importantes.
+                        -   Es necesario considerar las complejidades del sistema legal y los intereses económicos para abordar estos cambios.
+
+            **Estructura**:
+                1.  Introducción: Presenta el contexto histórico de la revolución constitucional en México.
+                2.  Capítulos: Presentan los argumentos clave y complejos de esta propuesta.
+                3.   Conclusión: Resume las conclusiones generales y destaca la importancia de considerar la complejidad del sistema legal y los intereses económicos para abordar estos cambios.
+
+            **Tono**: El tono es reflexivo e crítico, destacando la importancia de pensar en cómo mejorar el futuro de México. Las conclusiones son profundas y con un tono apasionado, lo que destaca las consecuencias a largo plazo de la propuesta.

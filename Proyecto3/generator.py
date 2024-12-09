@@ -39,7 +39,7 @@ def process_video_intervals(video_path, output_folder, intervals, resolution=(28
     print(f"Proceso completado. Imágenes redimensionadas: {crop_count * 4}")
 
 # Definir los intervalos en segundos para cada video
-intervals_porsche1 = [
+intervals_mini_cooper = [
     (2, 9),
     (12, 19),
     (27, 42),
@@ -49,7 +49,7 @@ intervals_porsche1 = [
     (300, 308)
 ]
 
-intervals_porsche2 = [
+intervals_porsche_cayenne = [
     (28, 31),
     (34, 36),
     (40,45),
@@ -58,7 +58,7 @@ intervals_porsche2 = [
     (115, 118)
 ]
 
-intervals_mercedes = [
+intervals_fiat_panda = [
     (41, 50),
     (54, 56),
     (68, 72),
@@ -68,15 +68,16 @@ intervals_mercedes = [
 ]
 
 # Rutas de los videos
-video_path1 = r"C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto3\VideoCars\PorscheGT3RS1.mp4"
-video_path2 = r"C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto3\VideoCars\PorscheGT3RS2.mp4"
-video_path_mercedes = r"C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto3\VideoCars\2025MercedesG63AMGFaceliftWhite.mp4"
+video_path_mini_cooper = r"C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto3\VideoCars\MiniCooper.mp4"
+video_path_porsche_cayenne = r"C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto3\VideoCars\PorscheCayenne.mp4"
+video_path_fiat_panda = r"C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto3\VideoCars\FiatPanda.mp4"
 
 # Carpeta de salida
-output_folder_porsche = r"C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto3\dataset\PorscheGT3RS"
-output_folder_mercedes = r"C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto3\dataset\MercedesG63AMGFacelift"
+output_folder_mini_cooper = r"C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto3\dataset\MiniCooper"
+output_folder_porsche_cayenne = r"C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto3\dataset\PorscheCayenne"
+output_folder_fiat_panda = r"C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto3\dataset\FiatPanda"
 
 # Procesar los videos
-process_video_intervals(video_path1, output_folder_porsche, intervals_porsche1)
-process_video_intervals(video_path2, output_folder_porsche, intervals_porsche2)
-process_video_intervals(video_path_mercedes, output_folder_mercedes, intervals_mercedes)
+process_video_intervals(video_path_mini_cooper, output_folder_mini_cooper, intervals_mini_cooper)
+process_video_intervals(video_path_porsche_cayenne, output_folder_porsche_cayenne, intervals_porsche_cayenne)
+process_video_intervals(video_path_fiat_panda, output_folder_fiat_panda, intervals_fiat_panda)
