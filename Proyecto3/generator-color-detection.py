@@ -1,5 +1,6 @@
 import cv2
 import os
+import uuid
 
 def process_video_intervals(video_path, output_folder, intervals, hsv_ranges, resolution=(28, 21)):
     """
@@ -54,13 +55,14 @@ def process_video_intervals(video_path, output_folder, intervals, hsv_ranges, re
                     cropped_image = frame[top_left[1]:bottom_right[1], top_left[0]:bottom_right[0]]
                     if cropped_image.size > 0:
                         resized_frame = cv2.resize(cropped_image, resolution, interpolation=cv2.INTER_AREA)
-                        for i in range(4):
+                        for i in range(1):
+                            unique_id = uuid.uuid4().hex
                             output_path = os.path.join(output_folder, f"frame_{crop_count:05d}_{i}.jpg")
                             cv2.imwrite(output_path, resized_frame)
                         crop_count += 1
 
     cap.release()
-    print(f"Proceso completado. Imágenes redimensionadas: {crop_count * 4}")
+    print(f"Proceso completado. Imágenes redimensionadas: {crop_count * 1}")
 
 # Definir los intervalos en segundos para cada video
 intervals_porsche1 = [

@@ -38,4 +38,4 @@ def pick_color(image_path):
     cv2.destroyAllWindows()
 
 # Llamar a la función con la ruta de la imagen
-pick_color(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto3\car.png')
+pick_color(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto3\Images\idbuzz.png')
