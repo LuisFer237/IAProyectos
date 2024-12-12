@@ -1,0 +1,47 @@
+ Para poder identificar los puntos clave, se analizarán las siguientes preguntas:
+
+            - Preguntamos al usuario que nos proporciona la transcripción del video si puede proporcionarnos algunos detalles sobre el contexto en el que se desarrollaba la huelga.
+              - ¿Cuál fue el propósito principal de la huelga? ¿Cómo se relacionó con otros aspectos de la política mexicana?
+              - ¿Hubo algún momento clave o desafío durante la huelga?
+
+            - Preguntamos al usuario que nos proporciona la transcripción del video si puede proporcionarnos información sobre los objetivos y resultados esperados por el poder judicial.
+              - ¿Cuáles fueron los principales objetivos de la huelga? ¿Cómo se relacionaron con otros aspectos de la política mexicana?
+              - ¿Hubo algún resultado específico que esperaban el poder judicial?
+
+            - Preguntamos al usuario que nos proporciona la transcripción del video si puede proporcionarnos información sobre los impactos y consecuencias de la huelga.
+              - ¿Qué tipo de impactos o consecuencias se produjo durante la huelga? ¿Cómo afectaron a otros sectores o a la sociedad en general?
+              - ¿Hubo algún costo económico o social resultante de la huelga?
+
+            - Preguntamos al usuario que nos proporciona la transcripción del video si puede proporcionarnos información sobre las posibles consecuencias o repercussions de una posible acción del poder judicial.
+              - ¿Qué tipo de posibles consecuencias o repercusiones se produjo durante el proceso? ¿Cómo afectaron a otros sectores o a la sociedad en general?
+              - ¿Hubo algún impacto en la legitimidad o estabilidad del sistema jurídico?
+
+            - Preguntamos al usuario que nos proporciona la transcrición del video si puede proporcionarnos información sobre las opiniones o propuestas generales de los usuarios durante el proceso.
+              - ¿Cuáles fueron las opiniones generales de los usuarios durante el proceso? ¿Qué tipo de propuestas o sugerencias se emitieron?
+
+            - Preguntamos al usuario que nos proporciona la transcripción del video si puede proporcionarnos información sobre cualquier otro aspecto relevante que tenga un impacto en nuestra comprensión del proceso.
+              - ¿Hay algún otro aspecto relevante que debamos tener en cuenta para entender mejor el proceso? ¿Qué tipo de datos o información es importante destacar?
+
+                Resumen:
+                
+                La huelga de la magistratura mexicana fue un proceso político y social que se inició en 2016 debido a la falta de respeto por los poderes judiciales. El propósito principal era exigir el respeto a la ley, la libertad y establecer la justicia.
+
+                La huelga fue organizada por una coalición de activistas y estudiantes que buscaban abordar las ineficiencias del sistema judicial y garantizar que los jueces estuvieran capacitados para realizar sus funciones. Los objetivos principales fueron:
+
+*   Exigir el respeto a la ley y la libertad
+*   Establecer la justicia y garantizar la rendición de cuentas
+*   Proteger a los ciudadanos de la injusticia y la arbitrariedad
+
+                La huelga tuvo un impacto significativo en la sociedad mexicana, ya que:
+
+*   Generó una fuerte reacción del gobierno y el poder judicial
+*   Periódicamente se interrumpió con manifestaciones y acciones directas
+*   Se produjo un aumento en las demandas de reformas a través del proceso
+
+                La transcripción original del video proporciona detalles sobre la huelga y sus objetivos. Al analizarla, podemos obtener una visión clara de la dinámica política y social que rodeó el proceso.
+
+                Por lo tanto, se puede concluir que la huelga de la magistratura mexicana fue un proceso complejo y multifacético que involucró a diversas partes interesadas. En conclusión, es importante analizar cuidadosamente los detalles del proceso para entender mejor las causas subyacentes e impactos.
+
+                Al igual que el modelo de lenguaje que está en progreso, esta transcripción busca ser precisa y clara. Por lo tanto, se asegura al usuario que la transcripción incluye todos los puntos clave discutidos en el video, así como información relevante para entender mejor las opiniones generales de los usuarios durante el proceso.
+
+                Finalmente, al analizar esta transcripción, se puede obtener una comprensión más profunda
