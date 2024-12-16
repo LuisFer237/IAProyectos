@@ -1,7 +1,6 @@
 import pygame
 import heapq
 
-# Inicializar Pygame
 pygame.init()
 
 # Configuraciones iniciales
@@ -29,8 +28,8 @@ class Nodo:
         self.ancho = ancho
         self.total_filas = total_filas
         self.vecinos = []
-        self.g_score = float("inf")
-        self.f_score = float("inf")
+        self.valor_g = float("inf")
+        self.valor_f = float("inf")
 
     def get_pos(self):
         return self.fila, self.col
@@ -58,10 +57,10 @@ class Nodo:
 
     def dibujar(self, ventana):
         pygame.draw.rect(ventana, self.color, (self.x, self.y, self.ancho, self.ancho))
-        if self.g_score != float("inf") and self.f_score != float("inf"):
+        if self.valor_g != float("inf") and self.valor_f != float("inf"):
             font = pygame.font.SysFont('Arial', 12)
-            g_text = font.render(f'g: {int(self.g_score)}', True, NEGRO)
-            f_text = font.render(f'f: {int(self.f_score)}', True, NEGRO)
+            g_text = font.render(f'g: {int(self.valor_g)}', True, NEGRO)
+            f_text = font.render(f'f: {int(self.valor_f)}', True, NEGRO)
             ventana.blit(g_text, (self.x + 5, self.y + 5))
             ventana.blit(f_text, (self.x + 5, self.y + 20))
 
@@ -129,15 +128,15 @@ def reconstruir_camino(came_from, actual, draw):
         actual.color = GRIS
         draw()
 
-def algoritmo_a_star(draw, grid, inicio, fin):
+def algoritmoasterisco(draw, grid, inicio, fin):
     count = 0
     open_set = []
     heapq.heappush(open_set, (0, count, inicio))
     came_from = {}
-    g_score = {nodo: float("inf") for fila in grid for nodo in fila}
-    g_score[inicio] = 0
-    f_score = {nodo: float("inf") for fila in grid for nodo in fila}
-    f_score[inicio] = heuristica(inicio.get_pos(), fin.get_pos())
+    valor_g = {nodo: float("inf") for fila in grid for nodo in fila}
+    valor_g[inicio] = 0
+    valor_f = {nodo: float("inf") for fila in grid for nodo in fila}
+    valor_f[inicio] = heuristica(inicio.get_pos(), fin.get_pos())
 
     open_set_hash = {inicio}
 
@@ -156,17 +155,17 @@ def algoritmo_a_star(draw, grid, inicio, fin):
             return True
 
         for vecino in actual.vecinos:
-            temp_g_score = g_score[actual] + 1
+            temp_valor_g = valor_g[actual] + 1
 
-            if temp_g_score < g_score[vecino]:
+            if temp_valor_g < valor_g[vecino]:
                 came_from[vecino] = actual
-                g_score[vecino] = temp_g_score
-                f_score[vecino] = temp_g_score + heuristica(vecino.get_pos(), fin.get_pos())
-                vecino.g_score = g_score[vecino]
-                vecino.f_score = f_score[vecino]
+                valor_g[vecino] = temp_valor_g
+                valor_f[vecino] = temp_valor_g + heuristica(vecino.get_pos(), fin.get_pos())
+                vecino.valor_g = valor_g[vecino]
+                vecino.valor_f = valor_f[vecino]
                 if vecino not in open_set_hash:
                     count += 1
-                    heapq.heappush(open_set, (f_score[vecino], count, vecino))
+                    heapq.heappush(open_set, (valor_f[vecino], count, vecino))
                     open_set_hash.add(vecino)
                     vecino.color = AZUL
 
@@ -178,7 +177,7 @@ def algoritmo_a_star(draw, grid, inicio, fin):
     return False
 
 def main(ventana, ancho):
-    FILAS = 10
+    FILAS = 7
     grid = crear_grid(FILAS, ancho)
 
     inicio = None
@@ -192,7 +191,7 @@ def main(ventana, ancho):
             if event.type == pygame.QUIT:
                 corriendo = False
 
-            if pygame.mouse.get_pressed()[0]:  # Click izquierdo
+            if pygame.mouse.get_pressed()[0]:
                 pos = pygame.mouse.get_pos()
                 fila, col = obtener_click_pos(pos, FILAS, ancho)
                 nodo = grid[fila][col]
@@ -207,7 +206,7 @@ def main(ventana, ancho):
                 elif nodo != fin and nodo != inicio:
                     nodo.hacer_pared()
 
-            elif pygame.mouse.get_pressed()[2]:  # Click derecho
+            elif pygame.mouse.get_pressed()[2]:
                 pos = pygame.mouse.get_pos()
                 fila, col = obtener_click_pos(pos, FILAS, ancho)
                 nodo = grid[fila][col]
@@ -223,7 +222,7 @@ def main(ventana, ancho):
                         for nodo in fila:
                             nodo.actualizar_vecinos(grid)
 
-                    algoritmo_a_star(lambda: dibujar(ventana, grid, FILAS, ancho), grid, inicio, fin)
+                    algoritmoasterisco(lambda: dibujar(ventana, grid, FILAS, ancho), grid, inicio, fin)
 
     pygame.quit()
 
