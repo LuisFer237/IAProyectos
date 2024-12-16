@@ -42,18 +42,32 @@ modo_auto_seleccionado = None  # Indica el modo automático seleccionado
 # Lista para guardar los datos de velocidad, distancia y salto (target)
 datos_modelo = []
 
+# # Cargar las imágenes
+# jugador_frames = [
+#     pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_1.png'),
+#     pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_2.png'),
+#     pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_3.png'),
+#     pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_4.png')
+# ]
+
+# bala_img = pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\purple_ball.png')
+# fondo_img = pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\game\fondo2.png')
+# nave_img = pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\game\ufo.png')
+# menu_img = pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\game\menu.png')
+
 # Cargar las imágenes
 jugador_frames = [
-    pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_1.png'),
-    pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_2.png'),
-    pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_3.png'),
-    pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_4.png')
+    pygame.image.load(r'C:\Users\luis2\OneDrive - Instituto Tecnológico de Morelia\Documents\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_1.png'),
+    pygame.image.load(r'C:\Users\luis2\OneDrive - Instituto Tecnológico de Morelia\Documents\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_2.png'),
+    pygame.image.load(r'C:\Users\luis2\OneDrive - Instituto Tecnológico de Morelia\Documents\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_3.png'),
+    pygame.image.load(r'C:\Users\luis2\OneDrive - Instituto Tecnológico de Morelia\Documents\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_4.png')
 ]
 
-bala_img = pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\purple_ball.png')
-fondo_img = pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\game\fondo2.png')
-nave_img = pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\game\ufo.png')
-menu_img = pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\game\menu.png')
+bala_img = pygame.image.load(r'C:\Users\luis2\OneDrive - Instituto Tecnológico de Morelia\Documents\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\purple_ball.png')
+fondo_img = pygame.image.load(r'C:\Users\luis2\OneDrive - Instituto Tecnológico de Morelia\Documents\IA\IAProyectos\Proyecto2\pygamesc\assets\game\fondo2.png')
+nave_img = pygame.image.load(r'C:\Users\luis2\OneDrive - Instituto Tecnológico de Morelia\Documents\IA\IAProyectos\Proyecto2\pygamesc\assets\game\ufo.png')
+menu_img = pygame.image.load(r'C:\Users\luis2\OneDrive - Instituto Tecnológico de Morelia\Documents\IA\IAProyectos\Proyecto2\pygamesc\assets\game\menu.png')
+
 
 # Escalar la imagen de fondo para que coincida con el tamaño de la pantalla
 fondo_img = pygame.transform.scale(fondo_img, (w, h))

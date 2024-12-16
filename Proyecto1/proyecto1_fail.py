@@ -17,6 +17,7 @@ ROJO = (220, 50, 50)
 AZUL_CLARO = (100, 180, 255)
 PURPURA = (150, 75, 175)
 AZUL = (50, 100, 200)
+MORADO_SUAVE = (200, 150, 255)
 
 class Nodo:
     def __init__(self, fila, col, ancho, total_filas):
@@ -27,9 +28,10 @@ class Nodo:
         self.color = BLANCO
         self.ancho = ancho
         self.total_filas = total_filas
-        self.vecinos = []
-        self.valor_g = float("inf")
-        self.valor_f = float("inf")
+        self.g = float("inf")
+        self.h = 0
+        self.f = float("inf")
+        self.padre = None
 
     def get_pos(self):
         return self.fila, self.col
@@ -45,6 +47,10 @@ class Nodo:
 
     def restablecer(self):
         self.color = BLANCO
+        self.g = float("inf")
+        self.h = 0
+        self.f = float("inf")
+        self.padre = None
 
     def hacer_inicio(self):
         self.color = VERDE
@@ -57,32 +63,12 @@ class Nodo:
 
     def dibujar(self, ventana):
         pygame.draw.rect(ventana, self.color, (self.x, self.y, self.ancho, self.ancho))
-        if self.valor_g != float("inf") and self.valor_f != float("inf"):
+        if self.g != float("inf") and self.f != float("inf"):
             font = pygame.font.SysFont('Arial', 12)
-            g_text = font.render(f'g: {int(self.valor_g)}', True, NEGRO)
-            f_text = font.render(f'f: {int(self.valor_f)}', True, NEGRO)
+            g_text = font.render(f'g: {int(self.g)}', True, NEGRO)
+            f_text = font.render(f'f: {int(self.f)}', True, NEGRO)
             ventana.blit(g_text, (self.x + 5, self.y + 5))
             ventana.blit(f_text, (self.x + 5, self.y + 20))
-
-    def actualizar_vecinos(self, grid):
-        self.vecinos = []
-        if self.fila < self.total_filas - 1 and not grid[self.fila + 1][self.col].es_pared():  # Abajo
-            self.vecinos.append(grid[self.fila + 1][self.col])
-        if self.fila > 0 and not grid[self.fila - 1][self.col].es_pared():  # Arriba
-            self.vecinos.append(grid[self.fila - 1][self.col])
-        if self.col < self.total_filas - 1 and not grid[self.fila][self.col + 1].es_pared():  # Derecha
-            self.vecinos.append(grid[self.fila][self.col + 1])
-        if self.col > 0 and not grid[self.fila][self.col - 1].es_pared():  # Izquierda
-            self.vecinos.append(grid[self.fila][self.col - 1])
-        # Diagonales
-        if self.fila < self.total_filas - 1 and self.col < self.total_filas - 1 and not grid[self.fila + 1][self.col + 1].es_pared():  # Abajo-Derecha
-            self.vecinos.append(grid[self.fila + 1][self.col + 1])
-        if self.fila < self.total_filas - 1 and self.col > 0 and not grid[self.fila + 1][self.col - 1].es_pared():  # Abajo-Izquierda
-            self.vecinos.append(grid[self.fila + 1][self.col - 1])
-        if self.fila > 0 and self.col < self.total_filas - 1 and not grid[self.fila - 1][self.col + 1].es_pared():  # Arriba-Derecha
-            self.vecinos.append(grid[self.fila - 1][self.col + 1])
-        if self.fila > 0 and self.col > 0 and not grid[self.fila - 1][self.col - 1].es_pared():  # Arriba-Izquierda
-            self.vecinos.append(grid[self.fila - 1][self.col - 1])
 
 def crear_grid(filas, ancho):
     grid = []
@@ -106,7 +92,6 @@ def dibujar(ventana, grid, filas, ancho):
     for fila in grid:
         for nodo in fila:
             nodo.dibujar(ventana)
-
     dibujar_grid(ventana, filas, ancho)
     pygame.display.update()
 
@@ -117,63 +102,63 @@ def obtener_click_pos(pos, filas, ancho):
     col = x // ancho_nodo
     return fila, col
 
-def heuristica(p1, p2):
-    x1, y1 = p1
-    x2, y2 = p2
-    return max(abs(x1 - x2), abs(y1 - y2))
+def calcular_heuristica(nodo, fin):
+    dx = abs(nodo.fila - fin.fila)
+    dy = abs(nodo.col - fin.col)
+    return max(dx, dy) + (1.41 - 1) * min(dx, dy)
 
-def reconstruir_camino(came_from, actual, draw):
-    while actual in came_from:
-        actual = came_from[actual]
-        actual.color = GRIS
-        draw()
+def vecinos(nodo, grid):
+    vecinos = []
+    filas, cols = len(grid), len(grid[0])
+    direcciones = [(-1, 0), (1, 0), (0, -1), (0, 1), (-1, -1), (-1, 1), (1, -1), (1, 1)]
+    for dx, dy in direcciones:
+        x, y = nodo.fila + dx, nodo.col + dy
+        if 0 <= x < filas and 0 <= y < cols:
+            if abs(dx) + abs(dy) == 2:
+                if grid[nodo.fila][nodo.col + dy].es_pared() and grid[nodo.fila + dx][nodo.col].es_pared():
+                    continue
+            vecinos.append(grid[x][y])
+    return vecinos
 
-def algoritmoasterisco(draw, grid, inicio, fin):
-    count = 0
+def reconstruir_camino(came_from, nodo, ventana, grid, inicio, fin):
+    camino = []
+    while nodo in came_from:
+        camino.append(nodo)
+        nodo = came_from[nodo]
+    camino.append(inicio)
+    for nodo in reversed(camino):
+        if nodo != inicio and nodo != fin:
+            nodo.color = MORADO_SUAVE
+        dibujar(ventana, grid, len(grid), ANCHO_VENTANA)
+        pygame.time.delay(100)
+
+def algoritmo_a_asterisco(ventana, grid, inicio, fin):
     open_set = []
-    heapq.heappush(open_set, (0, count, inicio))
+    heapq.heappush(open_set, (inicio.f, inicio))
     came_from = {}
-    valor_g = {nodo: float("inf") for fila in grid for nodo in fila}
-    valor_g[inicio] = 0
-    valor_f = {nodo: float("inf") for fila in grid for nodo in fila}
-    valor_f[inicio] = heuristica(inicio.get_pos(), fin.get_pos())
-
-    open_set_hash = {inicio}
-
-    while not len(open_set) == 0:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-
-        actual = heapq.heappop(open_set)[2]
-        open_set_hash.remove(actual)
-
-        if actual == fin:
-            reconstruir_camino(came_from, fin, draw)
-            fin.color = ROJO
-            inicio.color = VERDE
+    inicio.g = 0
+    inicio.f = calcular_heuristica(inicio, fin)
+    while open_set:
+        _, nodo_actual = heapq.heappop(open_set)
+        if nodo_actual == fin:
+            reconstruir_camino(came_from, nodo_actual, ventana, grid, inicio, fin)
             return True
-
-        for vecino in actual.vecinos:
-            temp_valor_g = valor_g[actual] + 1
-
-            if temp_valor_g < valor_g[vecino]:
-                came_from[vecino] = actual
-                valor_g[vecino] = temp_valor_g
-                valor_f[vecino] = temp_valor_g + heuristica(vecino.get_pos(), fin.get_pos())
-                vecino.valor_g = valor_g[vecino]
-                vecino.valor_f = valor_f[vecino]
-                if vecino not in open_set_hash:
-                    count += 1
-                    heapq.heappush(open_set, (valor_f[vecino], count, vecino))
-                    open_set_hash.add(vecino)
-                    vecino.color = AZUL
-
-        draw()
-
-        if actual != inicio and actual != fin:
-            actual.color = AZUL
-
+        if nodo_actual != inicio and nodo_actual != fin:
+            nodo_actual.color = (255, 255, 0)
+        for vecino in vecinos(nodo_actual, grid):
+            if vecino.es_pared():
+                continue
+            dx = vecino.x - nodo_actual.x
+            dy = vecino.y - nodo_actual.y
+            tentativo_g = nodo_actual.g + (1.41 if abs(dx) + abs(dy) == 2 else 1)
+            if tentativo_g < vecino.g:
+                came_from[vecino] = nodo_actual
+                vecino.g = tentativo_g
+                vecino.h = calcular_heuristica(vecino, fin)
+                vecino.f = vecino.g + vecino.h
+                heapq.heappush(open_set, (vecino.f, vecino))
+        dibujar(ventana, grid, len(grid), ANCHO_VENTANA)
+        pygame.time.delay(10)
     return False
 
 def main(ventana, ancho):
@@ -222,7 +207,7 @@ def main(ventana, ancho):
                         for nodo in fila:
                             nodo.actualizar_vecinos(grid)
 
-                    algoritmoasterisco(lambda: dibujar(ventana, grid, FILAS, ancho), grid, inicio, fin)
+                    algoritmo_a_asterisco(lambda: dibujar(ventana, grid, FILAS, ancho), grid, inicio, fin)
 
     pygame.quit()
 
