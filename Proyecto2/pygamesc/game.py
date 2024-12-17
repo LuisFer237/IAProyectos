@@ -27,10 +27,13 @@ nave = None
 menu = None
 
 # Variables de salto
+velocidad_horizontal = 0
 salto = False
 salto_altura = 15  # Velocidad inicial de salto
-gravedad = 0.6
+gravedad = 1
 en_suelo = True
+contador_entrenamiento = 0
+
 
 # Variables de pausa y menú
 pausa = False
@@ -39,35 +42,21 @@ menu_activo = True
 modo_auto = False  # Indica si el modo de juego es automático
 modo_auto_seleccionado = None  # Indica el modo automático seleccionado
 
-# Lista para guardar los datos de velocidad, distancia y salto (target)
+# Lista para guardar los datos de velocidad, distancia y salto 
 datos_modelo = []
 
 # # Cargar las imágenes
-# jugador_frames = [
-#     pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_1.png'),
-#     pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_2.png'),
-#     pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_3.png'),
-#     pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_4.png')
-# ]
-
-# bala_img = pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\purple_ball.png')
-# fondo_img = pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\game\fondo2.png')
-# nave_img = pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\game\ufo.png')
-# menu_img = pygame.image.load(r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto2\pygamesc\assets\game\menu.png')
-
-# Cargar las imágenes
 jugador_frames = [
-    pygame.image.load(r'C:\Users\luis2\OneDrive - Instituto Tecnológico de Morelia\Documents\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_1.png'),
-    pygame.image.load(r'C:\Users\luis2\OneDrive - Instituto Tecnológico de Morelia\Documents\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_2.png'),
-    pygame.image.load(r'C:\Users\luis2\OneDrive - Instituto Tecnológico de Morelia\Documents\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_3.png'),
-    pygame.image.load(r'C:\Users\luis2\OneDrive - Instituto Tecnológico de Morelia\Documents\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\mono_frame_4.png')
+    pygame.image.load(r'Proyecto2/pygamesc/assets/sprites/mono_frame_1.png'),
+    pygame.image.load(r'Proyecto2\pygamesc\assets\sprites\mono_frame_2.png'),
+    pygame.image.load(r'Proyecto2\pygamesc\assets\sprites\mono_frame_3.png'),
+    pygame.image.load(r'Proyecto2\pygamesc\assets\sprites\mono_frame_4.png')
 ]
 
-bala_img = pygame.image.load(r'C:\Users\luis2\OneDrive - Instituto Tecnológico de Morelia\Documents\IA\IAProyectos\Proyecto2\pygamesc\assets\sprites\purple_ball.png')
-fondo_img = pygame.image.load(r'C:\Users\luis2\OneDrive - Instituto Tecnológico de Morelia\Documents\IA\IAProyectos\Proyecto2\pygamesc\assets\game\fondo2.png')
-nave_img = pygame.image.load(r'C:\Users\luis2\OneDrive - Instituto Tecnológico de Morelia\Documents\IA\IAProyectos\Proyecto2\pygamesc\assets\game\ufo.png')
-menu_img = pygame.image.load(r'C:\Users\luis2\OneDrive - Instituto Tecnológico de Morelia\Documents\IA\IAProyectos\Proyecto2\pygamesc\assets\game\menu.png')
-
+bala_img = pygame.image.load(r'Proyecto2\pygamesc\assets\sprites\purple_ball.png')
+fondo_img = pygame.image.load(r'Proyecto2\pygamesc\assets\game\fondo2.png')
+nave_img = pygame.image.load(r'Proyecto2\pygamesc\assets\game\ufo.png')
+menu_img = pygame.image.load(r'Proyecto2\pygamesc\assets\game\menu.png')
 
 # Escalar la imagen de fondo para que coincida con el tamaño de la pantalla
 fondo_img = pygame.transform.scale(fondo_img, (w, h))
@@ -80,7 +69,7 @@ menu_rect = pygame.Rect(w // 2 - 135, h // 2 - 90, 270, 180)  # Tamaño del men�
 
 # Variables para la animación del jugador
 current_frame = 0
-frame_speed = 10  # Cuántos frames antes de cambiar a la siguiente imagen
+frame_speed = 20  # Cuántos frames antes de cambiar a la siguiente imagen
 frame_count = 0
 
 # Variables para la bala
@@ -95,7 +84,7 @@ fondo_x2 = w
 def disparar_bala():
     global bala_disparada, velocidad_bala
     if not bala_disparada:
-        velocidad_bala = random.randint(-8, -3)  # Velocidad aleatoria negativa para la bala
+        velocidad_bala = random.randint(-15, -10)  # Aumentar la velocidad aleatoria negativa para la bala
         bala_disparada = True
 
 # Función para reiniciar la posición de la bala
@@ -103,21 +92,6 @@ def reset_bala():
     global bala, bala_disparada
     bala.x = w - 50  # Reiniciar la posición de la bala
     bala_disparada = False
-
-# Función para manejar el salto
-def manejar_salto():
-    global jugador, salto, salto_altura, gravedad, en_suelo
-
-    if salto:
-        jugador.y -= salto_altura  # Mover al jugador hacia arriba
-        salto_altura -= gravedad  # Aplicar gravedad (reduce la velocidad del salto)
-
-        # Si el jugador llega al suelo, detener el salto
-        if jugador.y >= h - 100:
-            jugador.y = h - 100
-            salto = False
-            salto_altura = 15  # Restablecer la velocidad de salto
-            en_suelo = True
 
 # Función para actualizar el juego
 def update():
@@ -140,9 +114,9 @@ def update():
     pantalla.blit(fondo_img, (fondo_x2, 0))
 
     # Animación del jugador
-    frame_count += 1
+    frame_count += 2
     if frame_count >= frame_speed:
-        current_frame = (current_frame + 1) % len(jugador_frames)
+        current_frame = (current_frame + 3) % len(jugador_frames)
         frame_count = 0
 
     # Dibujar el jugador con la animación
@@ -183,56 +157,6 @@ def pausa_juego():
     else:
         print("Juego reanudado.")
 
-# Función para mostrar el menú y seleccionar el modo de juego
-def mostrar_menu():
-    global menu_activo, modo_auto, datos_modelo
-    pantalla.fill(NEGRO)
-    texto = fuente.render("Presiona 'A' para Auto, 'M' para Manual, o 'Q' para Salir", True, BLANCO)
-    pantalla.blit(texto, (w // 4, h // 2))
-    pygame.display.flip()
-
-    while menu_activo:
-        for evento in pygame.event.get():
-            if evento.type == pygame.QUIT:
-                pygame.quit()
-                exit()
-            if evento.type == pygame.KEYDOWN:
-                if evento.key == pygame.K_a:
-                    modo_auto = True
-                    menu_activo = False
-                    mostrar_submenu_auto()
-                elif evento.key == pygame.K_m:
-                    datos_modelo = []
-                    modo_auto = False
-                    menu_activo = False
-                elif evento.key == pygame.K_q:
-                    print("Juego terminado. Datos recopilados:", datos_modelo)
-                    reiniciar_juego()  # Volver al menú principal
-
-# Función para mostrar el submenú de opciones automáticas
-def mostrar_submenu_auto():
-    global modo_auto_seleccionado
-    pantalla.fill(NEGRO)
-    texto = fuente.render("Presiona 'D' para Árbol de Decisión, 'R' para Red Neuronal", True, BLANCO)
-    pantalla.blit(texto, (w // 4, h // 2))
-    pygame.display.flip()
-
-    submenu_activo = True
-    while submenu_activo:
-        for evento in pygame.event.get():
-            if evento.type == pygame.QUIT:
-                pygame.quit()
-                exit()
-            if evento.type == pygame.KEYDOWN:
-                if evento.key == pygame.K_d:
-                    modo_auto_seleccionado = 'decision_tree'
-                    submenu_activo = False
-                    entrenar_arbol_decision()
-                elif evento.key == pygame.K_r:
-                    modo_auto_seleccionado = 'neural_network'
-                    submenu_activo = False
-                    entrenar_red_neuronal()
-
 # Función para entrenar el árbol de decisión
 def entrenar_arbol_decision():
     global clf
@@ -256,9 +180,14 @@ def entrenar_arbol_decision():
 
 # Función para entrenar la red neuronal
 def entrenar_red_neuronal():
-    global model
+    global model, contador_entrenamiento
+    model = None
     # Convertir los datos a un DataFrame de pandas
     df = pd.DataFrame(datos_modelo, columns=['velocidad_bala', 'distancia', 'salto_hecho'])
+    
+    # Duplicar los datos
+    df = pd.concat([df, df], ignore_index=True)
+    
     X = df[['velocidad_bala', 'distancia']]
     y = df['salto_hecho']
     
@@ -274,8 +203,13 @@ def entrenar_red_neuronal():
     # Compilar el modelo
     model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
     
-    # Entrenar el modelo
-    model.fit(X_train, y_train, epochs=30, batch_size=32, verbose=1)
+    if contador_entrenamiento == 0:
+        # Entrenar el modelo por primera vez sin imprimir
+        model.fit(X_train, y_train, epochs=60, batch_size=32, verbose=0)
+        contador_entrenamiento += 1
+    
+    # Entrenar el modelo por segunda vez con impresión
+    model.fit(X_train, y_train, epochs=60, batch_size=32, verbose=1)
     
     # Evaluar el modelo en el conjunto de prueba
     loss, accuracy = model.evaluate(X_test, y_test, verbose=0)
@@ -295,6 +229,72 @@ def reiniciar_juego():
     print("Datos recopilados para el modelo: ", datos_modelo)
     mostrar_menu()  # Mostrar el menú de nuevo para seleccionar modo
 
+# Función para manejar el salto
+def manejar_salto():
+    global jugador, salto, salto_altura, gravedad, en_suelo
+
+    if salto:
+        jugador.y -= salto_altura  # Mover al jugador hacia arriba
+        salto_altura -= gravedad  # Aplicar gravedad (reduce la velocidad del salto)
+
+        # Si el jugador llega al suelo, detener el salto
+        if jugador.y >= h - 100:
+            jugador.y = h - 100
+            salto = False
+            salto_altura = 15  # Restablecer la velocidad de salto
+            en_suelo = True
+
+# Función para iniciar el salto
+def iniciar_salto():
+    global salto, en_suelo
+    if en_suelo:
+        salto = True
+        en_suelo = False
+
+# Función para mostrar el menú y seleccionar el modo de juego
+def mostrar_menu():
+    global menu_activo, modo_auto, datos_modelo, modo_auto_seleccionado
+    pantalla.fill(NEGRO)
+    texto_titulo = fuente.render("Selecciona el modo de juego", True, BLANCO)
+    texto_opcion1 = fuente.render("1. Modo Manual", True, BLANCO)
+    texto_opcion2 = fuente.render("2. Árbol de Decisión", True, BLANCO)
+    texto_opcion3 = fuente.render("3. Red Neuronal", True, BLANCO)
+    texto_opcion4 = fuente.render("4. Salir", True, BLANCO)
+
+    pantalla.blit(texto_titulo, (w // 4, h // 4))
+    pantalla.blit(texto_opcion1, (w // 4, h // 4 + 40))
+    pantalla.blit(texto_opcion2, (w // 4, h // 4 + 80))
+    pantalla.blit(texto_opcion3, (w // 4, h // 4 + 120))
+    pantalla.blit(texto_opcion4, (w // 4, h // 4 + 160))
+    pygame.display.flip()
+
+    while menu_activo:
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            if evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_1:
+                    datos_modelo = []
+                    modo_auto = False
+                    modo_auto_seleccionado = None
+                    menu_activo = False
+                elif evento.key == pygame.K_2:
+                    modo_auto = True
+                    modo_auto_seleccionado = 'decision_tree'
+                    entrenar_arbol_decision()
+                    menu_activo = False
+                elif evento.key == pygame.K_3:
+                    modo_auto = True
+                    modo_auto_seleccionado = 'neural_network'
+                    entrenar_red_neuronal()
+                    menu_activo = False
+                elif evento.key == pygame.K_4:
+                    print("Juego terminado. Datos recopilados:", datos_modelo)
+                    pygame.quit()
+                    exit()
+
+# En el bucle principal del juego, asegúrate de llamar a iniciar_salto cuando el jugador salta
 def main():
     global salto, en_suelo, bala_disparada
 
@@ -308,12 +308,11 @@ def main():
                 correr = False
             if evento.type == pygame.KEYDOWN:
                 if evento.key == pygame.K_SPACE and en_suelo and not pausa:  # Detectar la tecla espacio para saltar
-                    salto = True
-                    en_suelo = False
+                    iniciar_salto()  # Llamar a iniciar_salto en lugar de solo cambiar las variables
                 if evento.key == pygame.K_p:  # Presiona 'p' para pausar el juego
                     pausa_juego()
-                if evento.key == pygame.K_q:  # Presiona 'q' para terminar el juego
-                    print("Juego terminado. Datos recopilados:", datos_modelo)
+                if evento.key == pygame.K_r:  # Presiona 'r' para regresar al menú
+                    print("Regresando al menú. Datos recopilados:", datos_modelo)
                     reiniciar_juego()  # Volver al menú principal
 
         if not pausa:
@@ -336,8 +335,7 @@ def main():
                 
                 print(f"Predicción: {prediccion}, Distancia: {distancia}, Velocidad: {velocidad_bala}")
                 if prediccion == 1 and en_suelo:
-                    salto = True
-                    en_suelo = False
+                    iniciar_salto()
 
             # Actualizar el juego
             if not bala_disparada:
