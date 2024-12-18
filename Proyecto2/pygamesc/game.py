@@ -84,7 +84,7 @@ fondo_x2 = w
 def disparar_bala():
     global bala_disparada, velocidad_bala
     if not bala_disparada:
-        velocidad_bala = random.randint(-15, -10)  # Aumentar la velocidad aleatoria negativa para la bala
+        velocidad_bala = random.randint(-15, -10)
         bala_disparada = True
 
 # Función para reiniciar la posición de la bala
