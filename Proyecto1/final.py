@@ -129,13 +129,9 @@ def a_star(start, end, grid):
     start.f = heuristic(start, end)
 
     path = []
+    update_counter = 0
 
     while open_set:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                exit()
-
         current = heapq.heappop(open_set)[1]
         current.explored = True
 
@@ -152,17 +148,19 @@ def a_star(start, end, grid):
                 if not any(neighbor == item[1] for item in open_set):
                     heapq.heappush(open_set, (neighbor.f, neighbor))
 
-        VENTANA.fill(BLANCO)
-        dibujar(VENTANA, grid, FILAS, ANCHO_VENTANA)
-        for fila in grid:
-            for nodo in fila:
-                if nodo.explored and nodo != start and nodo != end:
-                    nodo.color = AMARILLO
-        current.color = VERDE
-        start.color = NARANJA
-        end.color = PURPURA
-        pygame.display.update()
-        clock.tick(10)
+        if update_counter % 10 == 0:
+            VENTANA.fill(BLANCO)
+            dibujar(VENTANA, grid, FILAS, ANCHO_VENTANA)
+            for fila in grid:
+                for nodo in fila:
+                    if nodo.explored and nodo != start and nodo != end:
+                        nodo.color = AMARILLO
+            current.color = VERDE
+            start.color = NARANJA
+            end.color = PURPURA
+            pygame.display.update()
+            pygame.time.delay(50)  # Añadir un pequeño delay de 50ms
+        update_counter += 1
 
     return path
 
@@ -177,8 +175,6 @@ def reconstruct_path(end):
         nodo.color = AZUL
     pygame.display.update()
     return path
-
-# ...existing code...
 
 def main():
     grid = crear_grid(FILAS, ANCHO_VENTANA)
@@ -231,7 +227,6 @@ def main():
             for nodo in path:
                 nodo.color = AZUL
         pygame.display.update()
-        clock.tick(30)
 
     pygame.quit()
 
