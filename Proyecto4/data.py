@@ -7,8 +7,8 @@ import tkinter as tk
 from tkinter import filedialog, messagebox, scrolledtext
 
 # Ignorar advertencias de whisper y torch
-warnings.filterwarnings("ignore", category=UserWarning, module="whisper")
-warnings.filterwarnings("ignore", category=FutureWarning, module="torch")
+# warnings.filterwarnings("ignore", category=UserWarning, module="whisper")
+# warnings.filterwarnings("ignore", category=FutureWarning, module="torch")
 
 # Function to read text from a file
 def read_text_from_file(file_path):

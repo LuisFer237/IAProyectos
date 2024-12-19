@@ -22,7 +22,7 @@ def rotar_y_redimensionar(frame, angulo_max=15, resolution=(28, 21)):
 def desenfoque_gaussiano(frame, kernel_size=(5, 5)):
     return cv2.GaussianBlur(frame, kernel_size, 0)
 
-def agregar_ruido_sal_pimienta(frame, cantidad=0.02):
+def agregar_ruido(frame, cantidad=0.02):
     h, w = frame.shape[:2]
     salida = np.copy(frame)
     num_pixeles = int(cantidad * h * w)
@@ -37,7 +37,7 @@ def aplicar_filtros(frame):
         "brillo_bajo": lambda img: ajustar_brillo_contraste(img, alpha=0.8, beta=-30),
         "zoom": lambda img: aplicar_zoom(img, factor=1.3),
         "desenfoque": lambda img: desenfoque_gaussiano(img),
-        "ruido_sal_pimienta": lambda img: agregar_ruido_sal_pimienta(img),
+        "ruido_sal_pimienta": lambda img: agregar_ruido(img),
     }
 
     resultados = {}
