@@ -3,7 +3,7 @@ import random
 import heapq
 
 ANCHO_VENTANA = 800
-FILAS = 10
+FILAS = 5
 VENTANA = pygame.display.set_mode((ANCHO_VENTANA, ANCHO_VENTANA))
 pygame.display.set_caption("A* - Laberinto chido")
 clock = pygame.time.Clock()
@@ -97,7 +97,7 @@ def obtener_click_pos(pos, filas, ancho):
     col = x // ancho_nodo
     return fila, col
 
-def connect_neighbors(grid):
+def celdas_vecinas(grid):
     for fila in grid:
         for nodo in fila:
             if not nodo.es_pared():
@@ -122,7 +122,7 @@ def connect_neighbors(grid):
 def heuristic(node1, node2):
     return max(abs(node1.fila - node2.fila), abs(node1.col - node2.col))
 
-def a_star(start, end, grid):
+def aasterisco(start, end, grid):
     open_set = []
     heapq.heappush(open_set, (0, start))
     start.g = 0
@@ -136,7 +136,7 @@ def a_star(start, end, grid):
         current.explored = True
 
         if current == end:
-            path = reconstruct_path(end)
+            path = reconstruir_camino(end)
             break
 
         for neighbor in current.neighbors:
@@ -159,12 +159,12 @@ def a_star(start, end, grid):
             start.color = NARANJA
             end.color = PURPURA
             pygame.display.update()
-            pygame.time.delay(50)  # Añadir un pequeño delay de 50ms
+            pygame.time.delay(50)
         update_counter += 1
 
     return path
 
-def reconstruct_path(end):
+def reconstruir_camino(end):
     path = []
     current = end
     while current.previous:
@@ -217,9 +217,9 @@ def main():
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE and start and end and not solving:
-                    connect_neighbors(grid)
+                    celdas_vecinas(grid)
                     solving = True
-                    path = a_star(start, end, grid)
+                    path = aasterisco(start, end, grid)
 
         VENTANA.fill(BLANCO)
         dibujar(VENTANA, grid, FILAS, ANCHO_VENTANA)
