@@ -11,10 +11,10 @@ import re
 openai.api_key = 'TU_CLAVE_DE_API'
 
 # Ruta del archivo CSV
-csv_file_path = r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto4\YouTube Video List Scraper.csv'
-audio_output_dir = r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto4\audios'
-text_output_dir = r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto4\audios-texto'
-summary_output_dir = r'C:\Users\luis2\OneDrive\Documentos\Escuela\Semestre 9\IA\IAProyectos\Proyecto4\dataset'
+csv_file_path = r'Proyecto4\YouTube Video List Scraper.csv'
+audio_output_dir = r'Proyecto4\audios'
+text_output_dir = r'Proyecto4\audios-texto'
+summary_output_dir = r'Proyecto4\dataset'
 
 # Máximo de videos a procesar
 max_videos = 50
