@@ -37,7 +37,7 @@ def aplicar_filtros(frame):
         "brillo_bajo": lambda img: ajustar_brillo_contraste(img, alpha=0.8, beta=-30),
         "zoom": lambda img: aplicar_zoom(img, factor=1.3),
         "desenfoque": lambda img: desenfoque_gaussiano(img),
-        "ruido_sal_pimienta": lambda img: agregar_ruido(img),
+        "ruido": lambda img: agregar_ruido(img),
     }
 
     resultados = {}
@@ -48,7 +48,7 @@ def aplicar_filtros(frame):
 def process_video_intervals(video_path, output_folder, intervals, max_frames, resolution=(28, 21)):
     os.makedirs(output_folder, exist_ok=True)
     total_frames = 0
-    max_frames = min(max_frames, 400)  # Limitar el número máximo de frames a 500
+    max_frames = min(max_frames, 400)
 
     while total_frames < max_frames:
         cap = cv2.VideoCapture(video_path)
